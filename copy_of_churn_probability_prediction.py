@@ -23,7 +23,6 @@ from urllib.error import HTTPError
 from zipfile import ZipFile
 import tarfile
 import shutil
-import subprocess
 
 CHUNK_SIZE = 40960
 DATA_SOURCE_MAPPING = 'telco-customer-churn:https%3A%2F%2Fstorage.googleapis.com%2Fkaggle-data-sets%2F13996%2F18858%2Fbundle%2Farchive.zip%3FX-Goog-Algorithm%3DGOOG4-RSA-SHA256%26X-Goog-Credential%3Dgcp-kaggle-com%2540kaggle-161607.iam.gserviceaccount.com%252F20240609%252Fauto%252Fstorage%252Fgoog4_request%26X-Goog-Date%3D20240609T043621Z%26X-Goog-Expires%3D259200%26X-Goog-SignedHeaders%3Dhost%26X-Goog-Signature%3D6335c2010b498c0155bbbb458cb1c3eb69970fa0bf84e26ce7559c5acc0e7fc6502d68895f9e59f43ae0df1022bd10d31d0565236a01e9e1a1b1603d1a8163d0c3cd721509c0266fcafcfff10356e058a1810be9bb41da93f57dee798b74b3e052a818973b8531729f9a3aed51cc5715ac938e66ecc65b08b0a222b914c157e87d8f5057f16a30424c06dd32a7757fd0620ba1cd1809e0692b4d0d7263143dbcd9b2c5f11448c8380e1664a1ff6932fccb854d5fbd520cfb4d52408b6aecfa7dee2899a115f06fbdf77456407dd268b56c35018799a412c93d9df40eff90f377328e51ccb6b0276774b319abc67c64611f25f1b1706c2a090e2f435f17c18dc2'
@@ -32,7 +31,6 @@ KAGGLE_INPUT_PATH='/kaggle/input'
 KAGGLE_WORKING_PATH='/kaggle/working'
 KAGGLE_SYMLINK='kaggle'
 
-subprocess.run("umount /kaggle/input/ 2> /dev/null", shell=True)
 shutil.rmtree('/kaggle/input', ignore_errors=True)
 os.makedirs(KAGGLE_INPUT_PATH, 0o777, exist_ok=True)
 os.makedirs(KAGGLE_WORKING_PATH, 0o777, exist_ok=True)
@@ -93,6 +91,7 @@ We want to explore this data set to understand what impacts customer churn and d
 
 #import python libraries
 import pandas as pd
+import subprocess
 import numpy as np
 import sklearn.metrics as m
 from sklearn.metrics import  roc_curve , auc , confusion_matrix, log_loss, brier_score_loss, f1_score
@@ -130,6 +129,8 @@ warnings.filterwarnings("ignore")
 
 #Read data in pandas dataframe
 df = pd.read_csv('/kaggle/input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv')
+
+subprocess.run("umount /kaggle/input/ 2> /dev/null", shell=True)
 
 #get a sense of the data
 df.head()
