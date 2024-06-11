@@ -17,7 +17,7 @@ def load_data():
     return data
 
 # Load the model
-model = load('nn_Tuned.joblib')
+st.model = load('nn_Tuned.joblib')
 
 # Preprocess the data
 data = load_data()
