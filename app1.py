@@ -5,6 +5,8 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from joblib import load
+
 
 # Load the dataset
 @st.cache_data
