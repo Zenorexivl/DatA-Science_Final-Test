@@ -14,6 +14,9 @@ def load_data():
     data = pd.read_csv(url, names=column_names, sep=',\s', engine='python')
     return data
 
+# Load the model
+model = load('model.joblib')
+
 # Preprocess the data
 data = load_data()
 
@@ -39,8 +42,8 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
-# Streamlit app
-st.title("Churn Prediction App")
+# Title of the web app
+st.title('Churn Prediction')
 
 def user_input_features():
     Gender = st.selectbox('Gender', options=list(label_encoders['gender'].classes_))
